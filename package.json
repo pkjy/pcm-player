@@ -1,0 +1,33 @@
+{
+  "name": "pcm-player",
+  "version": "0.0.3",
+  "description": "A minimalist javascript audio player for PCM streaming audio",
+  "main": "pcm-player.js",
+  "directories": {
+    "doc": "docs",
+    "example": "example"
+  },
+  "dependencies": {
+    "ws": "^7.3.0"
+  },
+  "files":["./pcm-player.js","./README.md"],
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pkjy/pcm-player.git"
+  },
+  "keywords": [
+    "pcm",
+    "player",
+    "webaudio",
+    "stream",
+    "websocket"
+  ],
+  "author": "pkjy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pkjy/pcm-player/issues"
+  },
+  "homepage": "https://github.com/pkjy/pcm-player#readme"
+}

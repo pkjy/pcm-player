@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>PCM player</title>
+</head>
+
+<body>
+  <div id="container" style="width: 400px; margin: 0 auto;">
+    <button onclick="loadPCM()">播放PCM</button>
+    <button onclick="pause()">暂停播放</button>
+    <button onclick="continuePlay()">继续播放</button>
+    <input type="range" max="20" value="10" min="0" id="range" onchange="changeVolume(event)" step="0.1">
+  </div>
+  <script>
+    let player
+    function loadPCM() {
+      var socketURL = 'ws://localhost:8080';
+      // 这是我搭载自己服务器上的server端，用来接收pcm数据
+      // 如果起了example里面的本地server端，改成对应的ws地址就行了
+      // var socketURL = 'wss://pkjy.xyz/websocket';
+
+      player = new PCMPlayer({
+        encoding: 'Int16',
+        channels: 2,
+        sampleRate: 8000,
+        flushingTime: 200
+      });
+
+      var ws = new WebSocket(socketURL);
+      ws.binaryType = 'arraybuffer';
+      ws.addEventListener('message', function (event) {
+        // 可以传 ArrayBuffer 或者 任意TypedArray
+        player.feed(event.data);
+      });
+    }
+
+    function changeVolume(e) {
+      player.volume(document.querySelector('#range').value)
+    }
+    async function pause() {
+      await player.pause()
+    }
+    function continuePlay() {
+      player.continue()
+    }
+  </script>
+  <script type="text/javascript" src="../pcm-player.js"></script>
+</body>
+
+</html>
