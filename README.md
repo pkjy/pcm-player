@@ -80,19 +80,21 @@ An example with simple node server script is available that include some raw pcm
 ``` bash 
 cd example/server
 ```
-2. run a local server （起一个本地服务）
+2. run a local server （把本地的服务端跑起来）
 ``` bash 
 node server.js
 ```
 
-3. then, just open **example/index.html** page. or you can visit *example/index.html* page through any webserver as steps below.（直接双击example/index.html文件即可体验，或者给前端页面也起一个服务。）
+3. then, just open **example/index.html** page. or you can visit *example/index.html* page through any webserver as steps below.（本地起一个服务，通过第四步的介绍。）
 
 4. If you don't have any web server, you can do following:
 
 ``` bash 
+# install local server package
 npm install http-server -g
 ```
 ``` bash
+# run a local server
 hs 
 ```
 then you will see a ready local server just like :

@@ -8,10 +8,11 @@
     "example": "example"
   },
   "dependencies": {
-    "ws": "^7.3.0"
   },
   "files":["./pcm-player.js","./README.md"],
-  "devDependencies": {},
+  "devDependencies": {
+    "ws": "^7.3.0"
+  },
   "scripts": {},
   "repository": {
     "type": "git",
