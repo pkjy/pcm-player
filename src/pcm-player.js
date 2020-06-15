@@ -1,4 +1,4 @@
-
+          
 class PCMPlayer {
   constructor(option) {
     this.init(option)
@@ -171,4 +171,7 @@ class PCMPlayer {
   async continue() {
     await this.audioCtx.resume()
   }
+
 }
+
+export default PCMPlayer

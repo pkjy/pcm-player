@@ -9,12 +9,14 @@
 <body>
   <div id="container" style="width: 400px; margin: 0 auto;">
     <button onclick="loadPCM()">PlayPCM</button>
-    <input type="range" max="20" value="10" min="0" id="range" onchange="changeVolume(event)" step="0.1"><br/>
+    <input type="range" max="20" value="10" min="0" id="range" onchange="changeVolume(event)" step="0.1"><br />
     <button onclick="pause()">PausePlaying</button>
     <button onclick="continuePlay()">ContinuePlaying</button>
   </div>
-  <script type="module">
-    import PCMPlayer from '../pcm-player.js'
+
+  <script src="../dist/index.js"></script>
+  <script>
+    // import PCMPlayer from '../dist/index.js'
     let player
     window.loadPCM = function loadPCM() {
       var socketURL = 'ws://localhost:8080';
@@ -23,10 +25,10 @@
       // var socketURL = 'wss://pkjy.xyz/websocket';
 
       player = new PCMPlayer({
-        encoding: 'Float32',
-        channels: 1,
-        sampleRate: 44100,
-        flushingTime: 200
+        inputCodec: 'Int16',
+        channels: 2,
+        sampleRate: 8000,
+        flushTime: 200
       });
 
       var ws = new WebSocket(socketURL);

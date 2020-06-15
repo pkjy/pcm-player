@@ -1,15 +1,14 @@
-PCM Player
+PCMPlayer
 -----------
-A minimalist javascript audio player for PCM streaming data for the browsers.
-简单的PCM流式数据播放器
+A minimalist javascript audio player for PCM streaming data for the browsers.  
+浏览器端简单的PCM流式数据播放器
 
-**How to use?（使用说明）**
+## How to use?（使用说明）
 
     var player = new PCMPlayer(option);
 
 Available options are:  
 可配置项如下:
-
 
 *inputCodec* - possible values Int8 / Int16 / Int32 / Float32 default: Int16（可用值 Int8 / Int16 / Int32 / Float32 默认是：Int16）
 
@@ -17,15 +16,27 @@ Available options are:
 
 *sampleRate* - sample rate of the PCM data（采样率）
 
-*flushTime* - flushing interval of PCM data to be played in milisecond. Default 1000ms （PCM数据多久播放一次的间隔，默认1000ms）
+*flushTime* - flushing interval of PCM data to be played in milisecond. Default 1000ms （PCM数据缓冲多久进行播放，默认1000ms）
 
-**Complete example（使用示例）:**  
+## Complete example（使用示例）:
+**Install（安装）**  
+you can install by CDN or npm  
+**CDN**
+``` html
+<script src="https://unpkg.com/pcm-player"></script>
+```
+
+**ES6**
 ``` bash  
 npm i pcm-player
 ```
 ``` javascript
+// in your js/ts file
 import PCMPlayer from 'pcm-player'
+```
 
+**use（使用）**
+``` javascript
 var player = new PCMPlayer({
     inputCodec: '16bitInt',
     channels: 2,
@@ -70,44 +81,21 @@ player.feed(pcm_data);
  * Safari for Mac 8+
  * Safari for iOS 8+
 
-**How to run example?**
+**How to run example?（体验示例里的文件）**
 
 An example with simple node server script is available that include some raw pcm data that will be served by websocket and at the client end, it will be played through PCM player. For running the example, first run the node server by following command:
 (I am assuming you are on project directory i.e pcm-player)
 
 1. open server directory （进入到server目录）
+    ``` bash 
+    cd example/server
+    ```
+2. run a local server （把本地的服务端跑起来，会起一个websocket服务，用来发送数据）
+    ``` bash 
+    node server.js
+    ```
 
-``` bash 
-cd example/server
-```
-2. run a local server （把本地的服务端跑起来）
-``` bash 
-node server.js
-```
-
-3. then, just open **example/index.html** page. or you can visit *example/index.html* page through any webserver as steps below.（本地起一个服务，通过第四步的介绍。）
-
-4. If you don't have any web server, you can do following:
-
-``` bash 
-# install local server package
-npm install http-server -g
-```
-``` bash
-# run a local server
-hs 
-```
-then you will see a ready local server just like :
-``` bash 
-Starting up http-server, serving ./
-Available on:
-  http://169.254.250.75:8081
-  http://192.168.1.105:8081
-  http://127.0.0.1:8081
-Hit CTRL-C to stop the server
-```
-
-Finally visit example page using URL  http://192.168.0.105:8081/example/index.html OR URL suggested by http-server（接着就可以按照提示的端口进行静态文件的访问，类似http://192.168.0.105:8081/example/index.html）
+3. then, just open **example/index.html** page.（直接双击example里面的index.html）
 
 **Thanks to**  
 

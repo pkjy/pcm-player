@@ -1,19 +1,24 @@
 {
   "name": "pcm-player",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A minimalist javascript audio player for PCM streaming audio",
-  "main": "pcm-player.js",
+  "main": "./dist/index.js",
   "directories": {
     "doc": "docs",
     "example": "example"
   },
-  "dependencies": {
-  },
-  "files":["./pcm-player.js","./README.md"],
+  "dependencies": {},
+  "files": [
+    "dist",
+    "src",
+    "./README.md"
+  ],
   "devDependencies": {
     "ws": "^7.3.0"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "rollup ./src/pcm-player.js --file ./dist/index.js --format umd --name 'PCMPlayer'"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/pkjy/pcm-player.git"

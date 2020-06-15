@@ -13,7 +13,7 @@
     <button onclick="continuePlay()">继续播放</button>
     <input type="range" max="20" value="10" min="0" id="range" onchange="changeVolume(event)" step="0.1">
   </div>
-  <script type="text/javascript" src="./pcm-player.js"></script>
+  <script src="https://unpkg.com/pcm-player"></script>
   <script>
     let player
     function loadPCM() {
@@ -22,10 +22,10 @@
       var socketURL = 'wss://pkjy.xyz/websocket';
 
       player = new PCMPlayer({
-        encoding: 'Int16',
+        inputCodec: 'Int16',
         channels: 2,
         sampleRate: 8000,
-        flushingTime: 200
+        flushTime: 200
       });
 
       var ws = new WebSocket(socketURL);
