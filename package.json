@@ -9,8 +9,8 @@
   },
   "dependencies": {},
   "files": [
-    "dist",
-    "src",
+    "./dist/",
+    "./src/",
     "./README.md"
   ],
   "devDependencies": {
