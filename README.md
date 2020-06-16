@@ -1,26 +1,27 @@
 PCMPlayer
 -----------
 A minimalist javascript audio player for PCM streaming data for the browsers.  
-浏览器端简单的PCM流式数据播放器
+浏览器端简单的PCM数据流播放器
 
 ## How to use?（使用说明）
 
-    var player = new PCMPlayer(option);
+    var player = new PCMPlayer(options);
 
 Available options are:  
 可配置项如下:
 
-*inputCodec* - possible values Int8 / Int16 / Int32 / Float32 default: Int16（可用值 Int8 / Int16 / Int32 / Float32 默认是：Int16）
-
-*channels* - no of channels in PCM data（声道数）
-
-*sampleRate* - sample rate of the PCM data（采样率）
-
-*flushTime* - flushing interval of PCM data to be played in milisecond. Default 1000ms （PCM数据缓冲多久进行播放，默认1000ms）
+| Name | Parameter |Default  | Type  |Remark|
+| ----- |:-----:| -----:|-----:|-----:|
+|inputCodec| Int8 / Int16 / Int32 / Float32 |Int16|string|编码格式|
+|channels| |1|number |声道数|
+|sampleRate| |8000| number|采样率|
+|flushTime| |1000|number| flushing interval of PCM data to be played in milisecond（PCM数据缓冲多久进行播放）|
 
 ## Complete example（使用示例）:
-**Install（安装）**  
-you can install by CDN or npm  
+### Install（安装）
+
+install by CDN or npm  
+
 **CDN**
 ``` html
 <script src="https://unpkg.com/pcm-player"></script>
@@ -35,7 +36,7 @@ npm i pcm-player
 import PCMPlayer from 'pcm-player'
 ```
 
-**use（使用）**
+### use（使用）
 ``` javascript
 var player = new PCMPlayer({
     inputCodec: '16bitInt',
@@ -49,7 +50,7 @@ var player = new PCMPlayer({
 player.feed(pcm_data);
 ```
 
-**Available Methods（API）**
+## Available Methods（方法）
 
 | Name        | Parameter           | Remark  |
 | ------------- |:-------------:| -----:|
@@ -57,34 +58,11 @@ player.feed(pcm_data);
 | volume      | decimal value 0 to +∞ ()      |  For controlling volume of the player, default is 1 |
 | destroy | -      |    Destroy the player instance and release the resources |
 | pause |-|pause playing|
-| continue|-|resume playing|
+| continue|-|resume playing|  
 
-| 名称        | 参数           | 备注  |
-| ------------- |:-------------:| -----:|
-| feed      |  原始PCM数据 |常常通过ajax或者websocket进行获取
-| volume      |  0 to +∞ ()      | 理论上是负无穷到正无穷，但是0的时候就完全禁音，太大的时候会爆音 |
-| destroy | -      |   摧毁实例，并且释放音频上下文 |
-| pause |-|暂停播放|
-| continue|-|继续播放|
-  
- **Compatibility（兼容性）**
- 
-   it is supported on:  
+## How to run example?（体验example里的文件）
 
- * Chrome for Android 34+
- * Chrome for Desktop 34+
- * Firefox for Android 41+
- * Firefox for Desktop 42+
- * IE11+ for Windows 8.1+
- * Edge for Windows 10+
- * Opera for Desktop
- * Safari for Mac 8+
- * Safari for iOS 8+
-
-**How to run example?（体验示例里的文件）**
-
-An example with simple node server script is available that include some raw pcm data that will be served by websocket and at the client end, it will be played through PCM player. For running the example, first run the node server by following command:
-(I am assuming you are on project directory i.e pcm-player)
+An example with simple node server script is available that include some raw pcm data that will be served by websocket and at the client end, it will be played through PCM player. 
 
 1. open server directory （进入到server目录）
     ``` bash 
@@ -97,7 +75,15 @@ An example with simple node server script is available that include some raw pcm
 
 3. then, just open **example/index.html** page.（直接双击example里面的index.html）
 
-**Thanks to**  
+## Thoubleshooting（常见问题）
+Safari only allow to play large than 22050Hz voice.  
+Safari浏览器播放的音频数据，采样率不能低于22050Hz。  
+>更多webaudio经验可以在此查看：[websocket pcm webaudio 经验](https://github.com/pkjy/blog/issues/6)
 
-[pcm-player](https://github.com/samirkumardas/pcm-player)
+## online demo（在线demo)
+[pcm-player demo](https://pkjy.github.io/pcm-player/)
+
+## Thanks to（鸣谢）
+
+Inspired by [pcm-player](https://github.com/samirkumardas/pcm-player)
 
