@@ -9,9 +9,9 @@
   },
   "dependencies": {},
   "files": [
-    "./dist/*",
-    "./src/*",
-    "./README.md"
+    "dist",
+    "src",
+    "README.md"
   ],
   "devDependencies": {
     "ws": "^7.3.0"
