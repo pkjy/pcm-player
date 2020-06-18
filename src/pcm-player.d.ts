@@ -26,32 +26,32 @@ declare module 'pcm-player' {
     readonly samples: Float32Array
     readonly interval: number
 
-    // init(option: option): void
+    private init(option: option): void
 
-    // getConvertValue(): Error | inputCodecs[keyof inputCodecs]
+    private getConvertValue(): Error | inputCodecs[keyof inputCodecs]
 
-    // getTypedArray(): Error | typedArrays[keyof inputCodecs]
+    private getTypedArray(): Error | typedArrays[keyof inputCodecs]
 
-    // initAudioContext(): void
+    private initAudioContext(): void
 
     static isTypedArray(data: ArrayBuffer): boolean
 
-    // isSupported(data: ArrayBuffer | keyof typedArrays): boolean | Error
+    private isSupported(data: ArrayBuffer | keyof typedArrays): boolean | Error
+
+    private getFormatedValue(data: ArrayBuffer | keyof typedArrays): Float32Array
+
+    private flush(): void
 
     feed(data: ArrayBuffer | keyof typedArrays): void
-
-    // getFormatedValue(data: ArrayBuffer | keyof typedArrays): Float32Array
 
     volume(volume: number): void
 
     destroy(): void
 
-    // flush(): void
-
     pause(): Promise<any>
 
     continue(): Promise<any>
-    
+
   }
 
   export =  PCMPlayer
