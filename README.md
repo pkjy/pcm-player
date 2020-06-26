@@ -39,7 +39,7 @@ import PCMPlayer from 'pcm-player'
 ### use（使用）
 ``` javascript
 var player = new PCMPlayer({
-    inputCodec: '16bitInt',
+    inputCodec: 'Int16',
     channels: 2,
     sampleRate: 8000,
     flushTime: 2000
