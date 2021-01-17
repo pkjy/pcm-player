@@ -25,7 +25,7 @@ class PCMPlayer {
     // 选定转换数据所需要的基本值
     const inputCodecs = {
       'Int8': 128,
-      'Int16': 327168,
+      'Int16': 32768,
       'Int32': 2147483648,
       'Float32': 1
     }

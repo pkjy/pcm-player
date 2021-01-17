@@ -2,7 +2,7 @@
 declare module 'pcm-player' {
   interface inputCodecs {
     'Int8': 128
-    'Int16': 327168
+    'Int16': 32768
     'Int32': 2147483648
     'Float32': 1
   }
