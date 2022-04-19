@@ -58,7 +58,7 @@ class PCMPlayer {
     // 控制音量的 GainNode
     // https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createGain
     this.gainNode = this.audioCtx.createGain()
-    this.gainNode.gain.value = 10
+    this.gainNode.gain.value = 0.1
     this.gainNode.connect(this.audioCtx.destination)
     this.startTime = this.audioCtx.currentTime
   }

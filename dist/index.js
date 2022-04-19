@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.PCMPlayer = factory());
-}(this, (function () { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.PCMPlayer = factory());
+})(this, (function () { 'use strict';
 
   class PCMPlayer {
     constructor(option) {
@@ -63,7 +63,7 @@
       // 控制音量的 GainNode
       // https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createGain
       this.gainNode = this.audioCtx.createGain();
-      this.gainNode.gain.value = 10;
+      this.gainNode.gain.value = 0.1;
       this.gainNode.connect(this.audioCtx.destination);
       this.startTime = this.audioCtx.currentTime;
     }
@@ -181,4 +181,4 @@
 
   return PCMPlayer;
 
-})));
+}));
