@@ -67,6 +67,11 @@ player.feed(pcm_data);
 | ------------- | -----:|
 | audioCtx      |  current AudioContext
 
+## Available Event（事件）
+|Name|Parameter|Remark|
+|----|---------|-|
+|onstatechange|(audioState, event)|audioState:BaseAudioContext.state ,event:BaseAudioContext.statechange|
+
 ## How to run example?（体验example里的文件）
 
 An example with simple node server script is available that include some raw pcm data that will be served by websocket and at the client end, it will be played through PCM player. 

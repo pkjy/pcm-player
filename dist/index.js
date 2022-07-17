@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.PCMPlayer = factory());
-})(this, (function () { 'use strict';
+  (global = global || self, global.PCMPlayer = factory());
+}(this, (function () { 'use strict';
 
   class PCMPlayer {
     constructor(option) {
@@ -23,6 +23,7 @@
       this.convertValue = this.getConvertValue();
       this.typedArray = this.getTypedArray();
       this.initAudioContext();
+      this.bindAudioContextEvent();
     }
 
     getConvertValue() {
@@ -100,6 +101,7 @@
       // 将新的完整buff数据赋值给samples
       // interval定时器也会从samples里面播放数据
       this.samples = tmp;
+      // console.log('this.samples', this.samples)
     }
 
     getFormatedValue(data) {
@@ -161,7 +163,7 @@
       if (this.startTime < this.audioCtx.currentTime) {
         this.startTime = this.audioCtx.currentTime;
       }
-      console.log('start vs current ' + this.startTime + ' vs ' + this.audioCtx.currentTime + ' duration: ' + audioBuffer.duration);
+      // console.log('start vs current ' + this.startTime + ' vs ' + this.audioCtx.currentTime + ' duration: ' + audioBuffer.duration);
       bufferSource.buffer = audioBuffer;
       bufferSource.connect(this.gainNode);
       bufferSource.start(this.startTime);
@@ -177,8 +179,15 @@
       await this.audioCtx.resume();
     }
 
+    bindAudioContextEvent() {
+      const self = this;
+      self.audioCtx.onstatechange = function (event) {
+        if (self.option.onstatechange && typeof self.option.onstatechange === 'function') self.option.onstatechange(self.audioCtx.state, event);
+      };
+    }
+
   }
 
   return PCMPlayer;
 
-}));
+})));

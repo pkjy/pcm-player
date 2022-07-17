@@ -1,4 +1,3 @@
-          
 class PCMPlayer {
   constructor(option) {
     this.init(option)
@@ -18,6 +17,7 @@ class PCMPlayer {
     this.convertValue = this.getConvertValue()
     this.typedArray = this.getTypedArray()
     this.initAudioContext()
+    this.bindAudioContextEvent()
   }
 
   getConvertValue() {
@@ -95,6 +95,7 @@ class PCMPlayer {
     // 将新的完整buff数据赋值给samples
     // interval定时器也会从samples里面播放数据
     this.samples = tmp;
+    // console.log('this.samples', this.samples)
   }
 
   getFormatedValue(data) {
@@ -156,7 +157,7 @@ class PCMPlayer {
     if (this.startTime < this.audioCtx.currentTime) {
       this.startTime = this.audioCtx.currentTime
     }
-    console.log('start vs current ' + this.startTime + ' vs ' + this.audioCtx.currentTime + ' duration: ' + audioBuffer.duration);
+    // console.log('start vs current ' + this.startTime + ' vs ' + this.audioCtx.currentTime + ' duration: ' + audioBuffer.duration);
     bufferSource.buffer = audioBuffer
     bufferSource.connect(this.gainNode)
     bufferSource.start(this.startTime)
@@ -170,6 +171,13 @@ class PCMPlayer {
 
   async continue() {
     await this.audioCtx.resume()
+  }
+
+  bindAudioContextEvent() {
+    const self = this
+    self.audioCtx.onstatechange = function (event) {
+      if (self.option.onstatechange && typeof self.option.onstatechange === 'function') self.option.onstatechange(self.audioCtx.state, event)
+    }
   }
 
 }

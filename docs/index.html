@@ -26,7 +26,10 @@
         inputCodec: 'Int16',
         channels: 2,
         sampleRate: 8000,
-        flushTime: 200
+        flushTime: 200,
+        onstatechange:(type, event)=>{
+          console.log('type', type, event)
+        }
       });
 
       var ws = new WebSocket(socketURL);
