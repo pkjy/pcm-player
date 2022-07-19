@@ -27,8 +27,11 @@
         channels: 2,
         sampleRate: 8000,
         flushTime: 200,
-        onstatechange:(type, event)=>{
-          console.log('type', type, event)
+        onstatechange:(node, event, type)=>{
+          console.log('type', node, event, type)
+        },
+        onended:(node, event)=>{
+          console.log('end fire', node, event)
         }
       });
 

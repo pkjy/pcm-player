@@ -29,9 +29,7 @@ class PCMPlayer {
       'Int32': 2147483648,
       'Float32': 1
     }
-    if (!inputCodecs[this.option.inputCodec]) {
-      throw new Error('wrong codec.please input one of these codecs:Int8,Int16,Int32,Float32')
-    }
+    if (!inputCodecs[this.option.inputCodec]) throw new Error('wrong codec.please input one of these codecs:Int8,Int16,Int32,Float32')
     return inputCodecs[this.option.inputCodec]
   }
 
@@ -46,9 +44,7 @@ class PCMPlayer {
       'Int32': Int32Array,
       'Float32': Float32Array
     }
-    if (!typedArrays[this.option.inputCodec]) {
-      throw new Error('wrong codec.please input one of these codecs:Int8,Int16,Int32,Float32')
-    }
+    if (!typedArrays[this.option.inputCodec]) throw new Error('wrong codec.please input one of these codecs:Int8,Int16,Int32,Float32')
     return typedArrays[this.option.inputCodec]
   }
 
@@ -71,9 +67,7 @@ class PCMPlayer {
   isSupported(data) {
     // 数据类型是否支持
     // 目前支持 ArrayBuffer 或者 TypedArray
-    if (!PCMPlayer.isTypedArray(data)) {
-      throw new Error('请传入ArrayBuffer或者任意TypedArray')
-    }
+    if (!PCMPlayer.isTypedArray(data)) throw new Error('请传入ArrayBuffer或者任意TypedArray')
     return true
   }
 
@@ -132,7 +126,13 @@ class PCMPlayer {
 
   flush() {
     if (!this.samples.length) return
+    const self = this
     var bufferSource = this.audioCtx.createBufferSource()
+    if (typeof this.option.onended === 'function') {
+      bufferSource.onended = function (event) {
+        self.option.onended(this, event)
+      }
+    }
     const length = this.samples.length / this.option.channels
     const audioBuffer = this.audioCtx.createBuffer(this.option.channels, length, this.option.sampleRate)
 
@@ -175,8 +175,10 @@ class PCMPlayer {
 
   bindAudioContextEvent() {
     const self = this
-    self.audioCtx.onstatechange = function (event) {
-      if (self.option.onstatechange && typeof self.option.onstatechange === 'function') self.option.onstatechange(self.audioCtx.state, event)
+    if (typeof self.option.onstatechange === 'function') {
+      this.audioCtx.onstatechange = function (event) {
+        self.option.onstatechange(this, event, self.audioCtx.state)
+      }
     }
   }
 

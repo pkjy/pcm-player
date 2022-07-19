@@ -17,7 +17,8 @@ declare module 'pcm-player' {
     channels: number
     sampleRate: number
     flushTime: number
-    onstatechange: (audioState: BaseAudioContext.state, event: BaseAudioContext.statechange) => {}
+    onstatechange: (node: AudioContext, event: Event, type: BaseAudioContext.state) => {}
+    onended: (node: AudioBufferSourceNode, event: Event) => {}
   }
 
   class PCMPlayer {

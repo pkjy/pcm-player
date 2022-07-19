@@ -70,7 +70,8 @@ player.feed(pcm_data);
 ## Available Event（事件）
 |Name|Parameter|Remark|
 |----|---------|-|
-|onstatechange|(audioState, event)|audioState:BaseAudioContext.state ,event:BaseAudioContext.statechange|
+|onstatechange|(node, event, type)|node: AudioContext, event: Event, type: BaseAudioContext.state|
+|onended|(node, event)|node: AudioBufferSourceNode, event: Event|
 
 ## How to run example?（体验example里的文件）
 
