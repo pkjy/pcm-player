@@ -75,7 +75,7 @@ class PCMPlayer {
     this.isSupported(data)
 
     // 获取格式化后的buffer
-    data = this.getFormatedValue(data);
+    data = this.getFormattedValue(data);
     // 开始拷贝buffer数据
     // 新建一个Float32Array的空间
     const tmp = new Float32Array(this.samples.length + data.length);
@@ -92,7 +92,7 @@ class PCMPlayer {
     // console.log('this.samples', this.samples)
   }
 
-  getFormatedValue(data) {
+  getFormattedValue(data) {
     if (data.constructor == ArrayBuffer) {
       data = new this.typedArray(data)
     } else {
@@ -177,7 +177,7 @@ class PCMPlayer {
     const self = this
     if (typeof self.option.onstatechange === 'function') {
       this.audioCtx.onstatechange = function (event) {
-        self.option.onstatechange(this, event, self.audioCtx.state)
+        self.audioCtx && self.option.onstatechange(this, event, self.audioCtx.state)
       }
     }
   }

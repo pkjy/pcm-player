@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.PCMPlayer = factory());
-}(this, (function () { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.PCMPlayer = factory());
+})(this, (function () { 'use strict';
 
   class PCMPlayer {
     constructor(option) {
@@ -81,7 +81,7 @@
       this.isSupported(data);
 
       // 获取格式化后的buffer
-      data = this.getFormatedValue(data);
+      data = this.getFormattedValue(data);
       // 开始拷贝buffer数据
       // 新建一个Float32Array的空间
       const tmp = new Float32Array(this.samples.length + data.length);
@@ -98,7 +98,7 @@
       // console.log('this.samples', this.samples)
     }
 
-    getFormatedValue(data) {
+    getFormattedValue(data) {
       if (data.constructor == ArrayBuffer) {
         data = new this.typedArray(data);
       } else {
@@ -183,7 +183,7 @@
       const self = this;
       if (typeof self.option.onstatechange === 'function') {
         this.audioCtx.onstatechange = function (event) {
-          self.option.onstatechange(this, event, self.audioCtx.state);
+          self.audioCtx && self.option.onstatechange(this, event, self.audioCtx.state);
         };
       }
     }
@@ -192,4 +192,4 @@
 
   return PCMPlayer;
 
-})));
+}));
