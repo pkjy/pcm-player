@@ -1,9 +1,9 @@
 const WebSocket = require('ws');
 const fs = require('fs');
 
-const pcm_file = './16bit-8000.raw';
+const pcm_file = './16bit-44100.pcm';
 let interval = 0,
-  sampleRate = 8000,
+  sampleRate = 44100,
   bytePerSample = 2,
   channels = 2,
   bytesChunk = (sampleRate * bytePerSample * channels),
