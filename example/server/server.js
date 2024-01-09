@@ -19,7 +19,7 @@ fs.readFile(pcm_file, (err, data) => {
 
 
 function openSocket() {
-  wss = new WebSocket.Server({ port: 8080 });
+  wss = new WebSocket.Server({ port: 8899 });
   console.log('Server ready...');
   wss.on('connection', function connection(ws) {
     ws.on('error', function (error) {

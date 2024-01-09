@@ -17,8 +17,8 @@ declare module 'pcm-player' {
     channels: number
     sampleRate: number
     flushTime: number
-    onstatechange: (node: AudioContext, event: Event, type: AudioContextState) => {}
-    onended: (node: AudioBufferSourceNode, event: Event) => {}
+    onstatechange?: (node: AudioContext, event: Event, type: AudioContextState) => void
+    onended?: (node: AudioBufferSourceNode, event: Event) => void
   }
 
   class PCMPlayer {
@@ -40,7 +40,7 @@ declare module 'pcm-player' {
 
     private isSupported(data: ArrayBuffer | keyof typedArrays): boolean | Error
 
-    private getFormatedValue(data: ArrayBuffer | keyof typedArrays): Float32Array
+    private getFormattedValue(data: ArrayBuffer | keyof typedArrays): Float32Array
 
     private flush(): void
 
