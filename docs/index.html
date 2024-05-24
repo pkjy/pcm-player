@@ -7,8 +7,8 @@
 </head>
 
 <body>
-  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script> -->
+  <!-- <script>eruda.init();</script> -->
   <div id="container"
        style="width: 400px; margin: 0 auto;">
     <button onclick="loadPCM()">PlayPCM</button>
@@ -35,7 +35,7 @@
     function loadPCM() {
       // 这是我搭载自己服务器上的server端，用来接收pcm数据
       // 如果起了example里面的本地server端，改成对应的ws地址就行了
-      var socketURL = 'ws://192.210.136.64:8080';
+      var socketURL = 'ws://23.94.99.218:8899';
 
       player = new PCMPlayer({
         inputCodec: 'Int16',
