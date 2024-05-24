@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.PCMPlayer = factory());
-})(this, (function () { 'use strict';
+  (global = global || self, global.PCMPlayer = factory());
+}(this, (function () { 'use strict';
 
   class PCMPlayer {
     constructor(option) {
@@ -14,7 +14,8 @@
         inputCodec: 'Int16', // 传入的数据是采用多少位编码，默认16位
         channels: 1, // 声道数
         sampleRate: 8000, // 采样率 单位Hz
-        flushTime: 1000 // 缓存时间 单位 ms
+        flushTime: 1000, // 缓存时间 单位 ms
+        fftSize: 2048 // analyserNode fftSize 
       };
 
       this.option = Object.assign({}, defaultOption, option); // 实例最终配置参数
@@ -63,6 +64,8 @@
       this.gainNode.gain.value = 0.1;
       this.gainNode.connect(this.audioCtx.destination);
       this.startTime = this.audioCtx.currentTime;
+      this.analyserNode = this.audioCtx.createAnalyser(); 
+      this.analyserNode.fftSize = this.option.fftSize;
     }
 
     static isTypedArray(data) {
@@ -166,6 +169,7 @@
       // console.log('start vs current ' + this.startTime + ' vs ' + this.audioCtx.currentTime + ' duration: ' + audioBuffer.duration);
       bufferSource.buffer = audioBuffer;
       bufferSource.connect(this.gainNode);
+      bufferSource.connect(this.analyserNode); // bufferSource连接到analyser
       bufferSource.start(this.startTime);
       this.startTime += audioBuffer.duration;
       this.samples = new Float32Array();
@@ -192,4 +196,4 @@
 
   return PCMPlayer;
 
-}));
+})));

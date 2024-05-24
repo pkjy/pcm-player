@@ -16,6 +16,7 @@ Available options are:
 |channels| |1|number |声道数|
 |sampleRate| |8000| number|采样率|
 |flushTime| |1000|number| flushing interval of PCM data to be played in milisecond（PCM数据缓冲多久进行播放）|
+|fftSize| |2048|number| a power of 2 between 2^5 and 2^15|
 
 ## Complete example（使用示例）:
 ### Install（安装）
@@ -66,6 +67,8 @@ player.feed(pcm_data);
 | Name        |  Remark  |
 | ------------- | -----:|
 | audioCtx      |  current AudioContext
+| gainNode      |  AudioContext gainNode
+| analyserNode      |  AudioContext AnalyserNode
 
 ## Available Event（事件）
 |Name|Parameter|Remark|

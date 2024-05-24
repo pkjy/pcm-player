@@ -17,6 +17,7 @@ declare module 'pcm-player' {
     channels: number
     sampleRate: number
     flushTime: number
+    fftSize: 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384 | 32768
     onstatechange?: (node: AudioContext, event: Event, type: AudioContextState) => void
     onended?: (node: AudioBufferSourceNode, event: Event) => void
   }
@@ -25,6 +26,8 @@ declare module 'pcm-player' {
     constructor(option: option)
 
     readonly audioCtx: AudioContext
+    readonly gainNode: GainNode
+    readonly analyserNode: AnalyserNode
     readonly samples: Float32Array
     readonly interval: number
 
