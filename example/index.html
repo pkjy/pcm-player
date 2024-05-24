@@ -52,14 +52,14 @@
       });
 
       // 绘制波形图
-      const bufferLength = player.analyser.frequencyBinCount;
+      const bufferLength = player.analyserNode.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
-      player.analyser.getByteTimeDomainData(dataArray);
+      player.analyserNode.getByteTimeDomainData(dataArray);
 
       function draw() {
         drawVisual = requestAnimationFrame(draw);
 
-        player.analyser.getByteTimeDomainData(dataArray);
+        player.analyserNode.getByteTimeDomainData(dataArray);
 
         const canvas  = document.querySelector(".visualizer");
         const canvasCtx  = canvas.getContext('2d')

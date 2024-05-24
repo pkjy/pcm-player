@@ -4,6 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <title>PCM player</title>
+  <style>
+    .visualizer{
+      width: 400px;
+      height:200px;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,6 +27,7 @@
            step="0.1"><br />
     <button onclick="pause()">PausePlaying</button>
     <button onclick="continuePlay()">ContinuePlaying</button>
+    <canvas class="visualizer"></canvas>
     <br><br><br><br><br><br>
     <div>note:please allow browser load mixed content</div>
     <div>注:如果无法播放，请尝试允许本页面加载混合内容(http)</div>
@@ -56,6 +63,49 @@
         // 可以传 ArrayBuffer 或者 任意TypedArray
         player.feed(event.data);
       });
+
+       // 绘制波形图
+       const bufferLength = player.analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      player.analyserNode.getByteTimeDomainData(dataArray);
+
+      function draw() {
+        drawVisual = requestAnimationFrame(draw);
+
+        player.analyserNode.getByteTimeDomainData(dataArray);
+
+        const canvas  = document.querySelector(".visualizer");
+        const canvasCtx  = canvas.getContext('2d')
+        const WIDTH = canvas.width,HEIGHT=canvas.height
+        canvasCtx.fillStyle = "rgb(200 200 200)";
+        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        canvasCtx.lineWidth = 2;
+        canvasCtx.strokeStyle = "rgb(0 0 0)";
+
+        canvasCtx.beginPath();
+
+        const sliceWidth = (WIDTH * 1.0) / bufferLength;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const v = dataArray[i] / 128.0;
+          const y = (v * HEIGHT) / 2;
+
+          if (i === 0) {
+            canvasCtx.moveTo(x, y);
+          } else {
+            canvasCtx.lineTo(x, y);
+          }
+
+          x += sliceWidth;
+        }
+
+        canvasCtx.lineTo(WIDTH, HEIGHT / 2);
+        canvasCtx.stroke();
+      }
+
+      draw();
     }
 
     function changeVolume(e) {
